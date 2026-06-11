@@ -5,27 +5,32 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
   if (req.method !== 'POST') { res.status(405).json({ error: 'Method not allowed' }); return; }
 
-  const { system, userMessage, mode } = req.body;
+  const { system, userMessage, mode, password } = req.body;
   if (!system || !userMessage) {
     res.status(400).json({ error: 'Missing required fields' }); return;
   }
 
-  // Rate limiting via simple in-memory store (resets on cold start)
-  // For production, replace with Redis or Vercel KV
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
-  if (!global._rl) global._rl = {};
-  const now = Date.now();
-  const windowMs = 24 * 60 * 60 * 1000; // 24 hours
-  const freeLimit = mode === 'premium' ? 999 : 3;
+  // Verify premium password
+  const isPremium = password && password === process.env.PREMIUM_PASSWORD;
 
-  if (!global._rl[ip]) global._rl[ip] = { count: 0, start: now };
-  if (now - global._rl[ip].start > windowMs) global._rl[ip] = { count: 0, start: now };
-
-  if (mode !== 'premium' && global._rl[ip].count >= freeLimit) {
-    res.status(429).json({ error: 'FREE_LIMIT_REACHED' }); return;
+  // Rate limiting for free users only
+  if (!isPremium) {
+    const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.socket.remoteAddress || 'unknown';
+    if (!global._rl) global._rl = {};
+    const now = Date.now();
+    const windowMs = 24 * 60 * 60 * 1000;
+    if (!global._rl[ip]) global._rl[ip] = { count: 0, start: now };
+    if (now - global._rl[ip].start > windowMs) global._rl[ip] = { count: 0, start: now };
+    if (global._rl[ip].count >= 3) {
+      res.status(429).json({ error: 'FREE_LIMIT_REACHED' }); return;
+    }
+    global._rl[ip].count++;
   }
 
-  global._rl[ip].count++;
+  // Password validation endpoint
+  if (mode === 'validate_password') {
+    res.status(200).json({ valid: isPremium }); return;
+  }
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -37,7 +42,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: mode === 'premium' ? 2000 : 900,
+        max_tokens: isPremium ? 2500 : 900,
         system,
         messages: [{ role: 'user', content: userMessage }]
       })
@@ -46,7 +51,7 @@ export default async function handler(req, res) {
     const data = await response.json();
     if (data.error) { res.status(500).json({ error: data.error.message }); return; }
     const text = data.content.map(b => b.text || '').join('');
-    res.status(200).json({ text, usageCount: global._rl[ip].count });
+    res.status(200).json({ text, isPremium });
   } catch (err) {
     res.status(500).json({ error: 'Something went wrong. Please try again.' });
   }
