@@ -4,32 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QuickFuel Kitchen — Spatula Spice & Tales</title>
-<meta name="description" content="AI kitchen assistant that turns ingredients into meals, macros, grocery lists and food content. By @spatulaspiceandtales.">
+<meta name="description" content="AI kitchen assistant. Ingredients → 10-min meal + macros + grocery list + IG content. By @spatulaspiceandtales.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --ol:#4A5C2E;--old:#3B4A25;--oldeep:#2C3A1A;
   --sg:#5C6B3A;--sgl:#D6DFCA;--sgxl:#EEF2E8;
   --cr:#F9F8F5;--ink:#1E2217;--mt:#6B7560;--bd:#D4DBCA;--am:#C4872A;
   --pr:#6B4A9B;--prbg:#F0EAF8;--prbd:#C4A8E8;--prdark:#4A2D7A;
   --lock:#8B6914;--lockbg:#FEF6E8;--lockbd:#F0D9A8;
+  --gold:#B8860B;--goldbg:#FFFBF0;--goldbd:#F0D060;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--cr);color:var(--ink);font-family:'DM Sans',sans-serif;min-height:100vh}
 
 /* STRIP */
-.strip{background:var(--oldeep);padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.strip{background:var(--oldeep);padding:.65rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .s-left{display:flex;align-items:center;gap:10px}
 .av{width:34px;height:34px;border-radius:50%;background:var(--sg);border:2px solid var(--sgl);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0}
 .s-name{font-size:12px;font-weight:500;color:#fff}
 .s-handle{font-size:10px;color:var(--sgl)}
 .s-links{display:flex;gap:8px;align-items:center}
-.sl{font-size:12px;font-weight:500;padding:5px 14px;border-radius:99px;text-decoration:none;transition:opacity .15s;white-space:nowrap}
-.sl:hover{opacity:.82}
+.sl{font-size:12px;font-weight:500;padding:6px 16px;border-radius:99px;text-decoration:none;transition:opacity .15s;white-space:nowrap;cursor:pointer;border:none;font-family:'DM Sans',sans-serif}
+.sl:hover{opacity:.85}
 .sl.ig{background:var(--sg);color:#fff}
 .sl.shop{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
-.sl.pro{background:var(--pr);color:#fff;font-size:13px;padding:6px 18px;font-weight:600}
-.sl.pro-active{background:var(--sgxl);color:var(--old);font-size:13px;padding:6px 18px;font-weight:600}
+.sl.pro{background:var(--pr);color:#fff;font-size:13px;padding:7px 20px;font-weight:600}
+.sl.pro-active{background:var(--sgxl);color:var(--old);font-size:13px;padding:7px 20px;font-weight:600}
 
 /* HERO */
 .hero{background:var(--ol);padding:2.5rem 1.5rem 0;text-align:center;position:relative;overflow:hidden}
@@ -43,20 +44,45 @@ body{background:var(--cr);color:var(--ink);font-family:'DM Sans',sans-serif;min-
 .wave{display:block;width:100%;height:38px;margin-bottom:-2px}
 
 /* USAGE BAR */
-.usage-bar{padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--bd)}
-.usage-bar.free-bar{background:var(--sgxl)}
-.usage-bar.premium-bar{background:var(--prbg);border-bottom-color:var(--prbd)}
-.usage-left{font-size:12px;color:var(--old);font-weight:500}
-.usage-left.premium-left{color:var(--prdark)}
-.usage-dots{display:flex;gap:5px}
+.ubar{padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--bd);background:var(--sgxl)}
+.ubar.premium{background:var(--prbg);border-bottom-color:var(--prbd)}
+.ubar.lifetime{background:var(--goldbg);border-bottom-color:var(--goldbd)}
+.uleft{font-size:12px;color:var(--old);font-weight:500}
+.udots{display:flex;gap:5px}
 .udot{width:11px;height:11px;border-radius:50%;background:var(--ol);transition:background .3s}
 .udot.used{background:var(--sgl)}
-.upgrade-pill{font-size:12px;font-weight:600;color:var(--pr);text-decoration:none;background:#fff;padding:5px 14px;border-radius:99px;border:1.5px solid var(--prbd);white-space:nowrap;transition:all .15s}
-.upgrade-pill:hover{background:var(--prbg)}
-.premium-pill{font-size:12px;font-weight:600;color:var(--prdark);background:#fff;padding:5px 14px;border-radius:99px;border:1.5px solid var(--prbd)}
+.upill{font-size:12px;font-weight:600;color:var(--pr);text-decoration:none;background:#fff;padding:5px 16px;border-radius:99px;border:1.5px solid var(--prbd);white-space:nowrap;transition:all .15s;cursor:pointer;font-family:'DM Sans',sans-serif}
+.upill:hover{background:var(--prbg)}
 
 /* MAIN */
 .main{max-width:820px;margin:0 auto;padding:1.75rem 1.25rem 5rem}
+
+/* PRICING CARDS */
+.pricing-section{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:1.5rem;margin-bottom:1.1rem;display:none}
+.pricing-section.show{display:block}
+.pricing-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--old);text-align:center;margin-bottom:.35rem}
+.pricing-sub{font-size:.85rem;color:var(--mt);text-align:center;margin-bottom:1.25rem}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.price-card{border-radius:12px;padding:1.25rem;border:1.5px solid var(--bd);position:relative;cursor:pointer;transition:border-color .15s}
+.price-card:hover{border-color:var(--pr)}
+.price-card.featured{border:2px solid var(--pr);background:var(--prbg)}
+.price-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--pr);color:#fff;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:3px 12px;border-radius:99px;white-space:nowrap}
+.price-badge.gold{background:var(--gold)}
+.price-name{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--mt);margin-bottom:.35rem}
+.price-amount{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--ink);line-height:1}
+.price-period{font-size:.8rem;color:var(--mt);margin-bottom:.75rem}
+.price-features{list-style:none;padding:0;margin:0 0 1rem}
+.price-features li{font-size:.82rem;color:var(--ink);padding:3px 0;display:flex;gap:6px;align-items:flex-start;line-height:1.4}
+.price-features li::before{content:"✓";color:var(--ol);font-weight:600;flex-shrink:0}
+.price-btn{width:100%;padding:.65rem;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .15s}
+.price-btn.monthly-btn{background:var(--pr);color:#fff}
+.price-btn.lifetime-btn{background:var(--gold);color:#fff}
+.price-btn:hover{opacity:.88}
+.price-btn:disabled{opacity:.55;cursor:not-allowed}
+.pricing-divider{display:flex;align-items:center;gap:10px;color:var(--mt);font-size:.8rem;margin-bottom:1rem}
+.pricing-divider::before,.pricing-divider::after{content:'';flex:1;height:1px;background:var(--bd)}
+.pw-already{text-align:center;font-size:.82rem;color:var(--mt)}
+.pw-already button{background:none;border:none;color:var(--pr);font-size:.82rem;cursor:pointer;text-decoration:underline;font-family:'DM Sans',sans-serif}
 
 /* MODE TOGGLE */
 .mode-row{display:flex;gap:6px;margin-bottom:1.1rem}
@@ -64,7 +90,7 @@ body{background:var(--cr);color:var(--ink);font-family:'DM Sans',sans-serif;min-
 .mbtn.on{background:var(--ol);color:#fff;border-color:var(--ol)}
 .mbtn:not(.on):hover{background:var(--sgxl);color:var(--ink);border-color:var(--sg)}
 
-/* PANELS */
+/* INPUT PANELS */
 .panel{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:1.4rem;margin-bottom:1.1rem}
 .ptitle{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:var(--old);margin-bottom:.25rem}
 .pdesc{font-size:.82rem;color:var(--mt);margin-bottom:1rem;line-height:1.5}
@@ -85,19 +111,17 @@ textarea::placeholder{color:var(--mt)}
 .pw-icon{font-size:2.5rem;margin-bottom:.75rem}
 .pw-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;color:var(--prdark);margin-bottom:.35rem}
 .pw-sub{font-size:.85rem;color:var(--mt);margin-bottom:1.25rem;line-height:1.5}
-.pw-row{display:flex;gap:8px;max-width:380px;margin:0 auto 1rem}
-.pw-input{flex:1;background:var(--prbg);border:1.5px solid var(--prbd);border-radius:8px;padding:.7rem 1rem;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--ink);outline:none;letter-spacing:.1em;text-align:center}
+.pw-row{display:flex;gap:8px;max-width:380px;margin:0 auto .5rem}
+.pw-input{flex:1;background:var(--prbg);border:1.5px solid var(--prbd);border-radius:8px;padding:.7rem 1rem;font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--ink);outline:none;letter-spacing:.08em;text-align:center}
 .pw-input:focus{border-color:var(--pr)}
 .pw-input::placeholder{letter-spacing:0;color:var(--mt)}
-.pw-btn{background:var(--pr);color:#fff;border:none;border-radius:8px;padding:0 1.3rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.pw-btn{background:var(--pr);color:#fff;border:none;border-radius:8px;padding:0 1.4rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
 .pw-btn:hover{opacity:.88}
 .pw-btn:disabled{opacity:.55;cursor:not-allowed}
-.pw-err{font-size:.82rem;color:#A32D2D;display:none;margin-top:.25rem}
+.pw-err{font-size:.82rem;color:#A32D2D;display:none;margin:.25rem 0 .75rem}
 .pw-divider{display:flex;align-items:center;gap:10px;color:var(--mt);font-size:.8rem;margin:1rem 0}
 .pw-divider::before,.pw-divider::after{content:'';flex:1;height:1px;background:var(--bd)}
-.pw-gumroad{display:inline-block;background:var(--ol);color:#fff;text-decoration:none;border-radius:8px;padding:.7rem 1.5rem;font-size:.9rem;font-weight:600;transition:background .15s}
-.pw-gumroad:hover{background:var(--old)}
-.pw-price{font-size:.75rem;color:var(--mt);margin-top:.5rem}
+.pw-back{background:none;border:none;color:var(--mt);font-size:.82rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline;margin-top:.5rem}
 
 /* LOADING */
 .load{display:none;background:#fff;border:1px solid var(--bd);border-radius:14px;padding:2.25rem 1.25rem;text-align:center;margin-bottom:1.1rem}
@@ -111,15 +135,15 @@ textarea::placeholder{color:var(--mt)}
 /* RESULT CARD */
 .rcard{display:none;background:#fff;border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:1.1rem}
 .rhead{background:var(--ol);padding:1.1rem 1.4rem}
-.rhead.premium-head{background:linear-gradient(135deg,var(--ol),var(--prdark))}
+.rhead.ph{background:linear-gradient(135deg,var(--ol) 0%,var(--prdark) 100%)}
+.rhead.lh{background:linear-gradient(135deg,var(--old) 0%,var(--gold) 100%)}
 .rtbadge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);font-size:.72rem;font-weight:500;padding:2px 9px;border-radius:99px;color:#fff;margin-bottom:6px}
 .rhead h2{color:#fff;font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;margin:0}
 .rbody{padding:1.4rem}
 .slabel{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ol);margin-bottom:8px;margin-top:1rem;display:flex;align-items:center;gap:6px}
 .slabel::after{content:'';flex:1;height:.5px;background:var(--sgxl)}
 .slabel:first-child{margin-top:0}
-.slabel.premium-label{color:var(--pr)}
-.slabel.premium-label::after{background:var(--prbd)}
+.slabel.pl{color:var(--pr)}.slabel.pl::after{background:var(--prbd)}
 .itags{display:flex;flex-wrap:wrap;gap:5px}
 .itag{background:var(--sgxl);color:var(--old);font-size:.8rem;padding:3px 10px;border-radius:99px;border:.5px solid var(--sgl)}
 .slist{list-style:none;padding:0;margin:0}
@@ -135,44 +159,40 @@ textarea::placeholder{color:var(--mt)}
 .ibox p{font-size:.82rem;color:var(--mt);line-height:1.5;margin:0}
 
 /* LOCKED SECTIONS */
-.locked-section{border:1.5px dashed var(--lockbd);border-radius:12px;padding:1rem 1.1rem;margin-top:.85rem;background:var(--lockbg);position:relative}
-.lock-row{display:flex;align-items:center;gap:10px}
-.lock-icon{font-size:22px;flex-shrink:0}
-.lock-title{font-size:13px;font-weight:600;color:var(--lock)}
-.lock-desc{font-size:11px;color:var(--am);margin-top:2px}
-.lock-preview{margin-top:.75rem;filter:blur(3.5px);pointer-events:none;user-select:none;font-size:12px;color:var(--mt);line-height:1.65}
-.lock-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.85rem;flex-wrap:wrap;gap:8px}
-.unlock-btn{background:var(--pr);color:#fff;border:none;border-radius:8px;padding:.55rem 1.4rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:opacity .15s}
+.lsec{border:1.5px dashed var(--lockbd);border-radius:12px;padding:1rem 1.1rem;margin-top:.85rem;background:var(--lockbg)}
+.lrow{display:flex;align-items:center;gap:10px}
+.licon{font-size:22px;flex-shrink:0}
+.ltitle{font-size:13px;font-weight:600;color:var(--lock)}
+.ldesc{font-size:11px;color:var(--am);margin-top:2px}
+.lpreview{margin-top:.75rem;filter:blur(3.5px);pointer-events:none;user-select:none;font-size:12px;color:var(--mt);line-height:1.65}
+.lfooter{display:flex;align-items:center;justify-content:space-between;margin-top:.85rem;flex-wrap:wrap;gap:8px}
+.unlock-btn{background:var(--pr);color:#fff;border:none;border-radius:8px;padding:.6rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .15s}
 .unlock-btn:hover{opacity:.88}
-.have-pw{font-size:.78rem;color:var(--pr);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'DM Sans',sans-serif}
-.have-pw:hover{color:var(--prdark)}
+.have-pw{font-size:.8rem;color:var(--pr);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'DM Sans',sans-serif}
 
-/* PREMIUM OUTPUT SECTIONS */
-.premium-section{background:var(--prbg);border:1px solid var(--prbd);border-radius:12px;padding:1rem 1.1rem;margin-top:.85rem}
-.ps-badge{display:inline-flex;align-items:center;gap:5px;background:var(--pr);color:#fff;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:2px 9px;border-radius:99px;margin-bottom:.75rem}
-
-/* MACRO GRID */
+/* PREMIUM SECTIONS */
+.psec{background:var(--prbg);border:1px solid var(--prbd);border-radius:12px;padding:1rem 1.1rem;margin-top:.85rem}
+.psbadge{display:inline-flex;align-items:center;gap:5px;background:var(--pr);color:#fff;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:2px 9px;border-radius:99px;margin-bottom:.75rem}
+.psbadge.gold{background:var(--gold)}
 .macro-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
 .mbox{background:#fff;border:.5px solid var(--prbd);border-radius:8px;padding:.65rem .4rem;text-align:center}
 .mval{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:var(--ink);line-height:1}
 .munit{font-size:.68rem;color:var(--mt)}
 .mlbl{font-size:.68rem;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--pr);margin-top:2px}
-
-/* GROCERY LIST */
-.grocery-list{list-style:none;padding:0;margin:0}
+.glist{list-style:none;padding:0;margin:0}
 .gi{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:.5px solid var(--prbd);font-size:.85rem;color:var(--ink);line-height:1.45}
 .gi:last-child{border-bottom:none}
 .gi-have{color:var(--ol);font-size:14px;flex-shrink:0;margin-top:1px}
 .gi-need{color:var(--am);font-size:14px;flex-shrink:0;margin-top:1px}
-
-/* MEAL PLAN */
 .mp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .mpbox{background:#fff;border:.5px solid var(--prbd);border-radius:8px;padding:.7rem}
 .mp-day{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--pr);margin-bottom:3px}
 .mp-meal{font-size:.82rem;font-weight:500;color:var(--ink);margin-bottom:2px;line-height:1.3}
 .mp-note{font-size:.72rem;color:var(--mt);line-height:1.4}
-
-/* CREATOR KIT */
+.bar-row{margin-bottom:6px}
+.bar-lrow{display:flex;justify-content:space-between;font-size:.72rem;margin-bottom:3px;color:var(--mt)}
+.bar-track{height:5px;background:var(--sgxl);border-radius:99px;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;transition:width .5s}
 .cblock{background:#fff;border-left:2px solid var(--ol);padding:.75rem 1rem;font-size:.88rem;color:var(--ink);line-height:1.65;white-space:pre-wrap;border-radius:0 8px 8px 0;margin-bottom:4px}
 .cblock.hook{border-color:var(--am);background:#FEF6E8}
 .cblock.tags{color:var(--old);font-size:.82rem}
@@ -180,51 +200,38 @@ textarea::placeholder{color:var(--mt)}
 .cpbtn{background:none;border:.5px solid var(--bd);border-radius:7px;padding:3px 10px;font-size:.75rem;color:var(--mt);cursor:pointer;margin-bottom:10px;transition:all .13s;display:block;margin-left:auto}
 .cpbtn:hover{border-color:var(--ol);color:var(--old)}
 
-/* NUTRITION CALCULATOR (PREMIUM) */
-.calc-panel{background:#fff;border:.5px solid var(--prbd);border-radius:10px;padding:1rem;margin-top:.75rem}
-.calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:.75rem}
-.calc-item{display:flex;flex-direction:column;gap:3px}
-.calc-label{font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--mt)}
-.calc-bar-track{height:5px;background:var(--sgxl);border-radius:99px;overflow:hidden}
-.calc-bar-fill{height:100%;border-radius:99px;transition:width .5s ease}
-.calc-pct{font-size:.72rem;color:var(--mt)}
-
 /* ACTION ROW */
 .arow{display:flex;gap:6px;flex-wrap:wrap;margin-top:1rem;padding-top:1rem;border-top:.5px solid var(--bd)}
 .abtn{flex:1;min-width:110px;padding:.6rem .8rem;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.84rem;font-weight:500;cursor:pointer;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .13s;text-decoration:none;border:none}
-.abtn.pri{background:var(--ol);color:#fff}
-.abtn.pri:hover{background:var(--old)}
-.abtn.gh{border:1px solid var(--bd);color:var(--mt);background:#fff}
-.abtn.gh:hover{border-color:var(--ol);color:var(--old);background:var(--sgxl)}
-.abtn.pro-btn{background:var(--pr);color:#fff}
-.abtn.pro-btn:hover{opacity:.88}
+.abtn.pri{background:var(--ol);color:#fff}.abtn.pri:hover{background:var(--old)}
+.abtn.gh{border:1px solid var(--bd);color:var(--mt);background:#fff}.abtn.gh:hover{border-color:var(--ol);color:var(--old);background:var(--sgxl)}
 
 /* LIMIT CARD */
 .limit-card{background:#fff;border:2px solid var(--prbd);border-radius:14px;padding:1.75rem 1.5rem;text-align:center;margin-bottom:1.1rem;display:none}
 .limit-card.show{display:block}
-.limit-emoji{font-size:2.5rem;margin-bottom:.75rem}
-.limit-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--old);margin-bottom:.4rem}
-.limit-sub{font-size:.85rem;color:var(--mt);margin-bottom:1.25rem;line-height:1.5}
-.limit-actions{display:flex;flex-direction:column;gap:8px;max-width:360px;margin:0 auto}
-.limit-upgrade{background:var(--pr);color:#fff;border:none;border-radius:10px;padding:.8rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:opacity .15s}
-.limit-upgrade:hover{opacity:.88}
-.limit-pw{background:none;border:1.5px solid var(--prbd);border-radius:10px;padding:.7rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--pr);cursor:pointer;transition:all .15s}
-.limit-pw:hover{background:var(--prbg)}
-.limit-reset{font-size:.75rem;color:var(--mt);margin-top:.6rem}
+.le{font-size:2.5rem;margin-bottom:.75rem}
+.lt{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--old);margin-bottom:.4rem}
+.ls{font-size:.85rem;color:var(--mt);margin-bottom:1.25rem;line-height:1.5}
+.lacts{display:flex;flex-direction:column;gap:8px;max-width:360px;margin:0 auto}
+.lact-up{background:var(--pr);color:#fff;border:none;border-radius:10px;padding:.8rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:opacity .15s}
+.lact-up:hover{opacity:.88}
+.lact-pw{background:none;border:1.5px solid var(--prbd);border-radius:10px;padding:.7rem 1.5rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--pr);cursor:pointer;transition:all .15s}
+.lact-pw:hover{background:var(--prbg)}
+.lreset{font-size:.75rem;color:var(--mt);margin-top:.6rem}
 
-/* UPGRADE CARD */
-.upgrade-card{background:var(--oldeep);border-radius:14px;padding:1.5rem;margin-bottom:1.1rem;display:none}
-.upgrade-card.show{display:block}
-.uc-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:#fff;margin-bottom:.3rem}
-.uc-sub{font-size:.82rem;color:rgba(255,255,255,.65);margin-bottom:1rem;line-height:1.5}
-.uc-features{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:1rem}
-.uc-feat{background:rgba(255,255,255,.08);border-radius:8px;padding:.6rem .8rem;display:flex;align-items:center;gap:7px;font-size:.82rem;color:rgba(255,255,255,.9)}
-.uc-actions{display:flex;flex-direction:column;gap:8px}
-.uc-buy{width:100%;background:var(--pr);color:#fff;border:none;border-radius:10px;padding:.8rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:opacity .15s}
-.uc-buy:hover{opacity:.88}
-.uc-pw{width:100%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:.7rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .15s}
-.uc-pw:hover{background:rgba(255,255,255,.18)}
-.uc-price{text-align:center;font-size:.75rem;color:rgba(255,255,255,.45);margin-top:.5rem}
+/* UPGRADE NUDGE */
+.upgrade-nudge{background:var(--oldeep);border-radius:14px;padding:1.5rem;margin-bottom:1.1rem;display:none}
+.upgrade-nudge.show{display:block}
+.un-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:#fff;margin-bottom:.3rem}
+.un-sub{font-size:.82rem;color:rgba(255,255,255,.65);margin-bottom:1rem;line-height:1.5}
+.un-features{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:1rem}
+.un-feat{background:rgba(255,255,255,.08);border-radius:8px;padding:.55rem .8rem;font-size:.82rem;color:rgba(255,255,255,.9);display:flex;align-items:center;gap:7px}
+.un-actions{display:flex;flex-direction:column;gap:8px}
+.un-buy{width:100%;background:var(--pr);color:#fff;border:none;border-radius:10px;padding:.8rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:opacity .15s}
+.un-buy:hover{opacity:.88}
+.un-pw{width:100%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:.7rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:all .15s}
+.un-pw:hover{background:rgba(255,255,255,.18)}
+.un-price{text-align:center;font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.5rem}
 
 /* EMAIL */
 .epanel{background:var(--sg);border-radius:14px;padding:1.5rem;text-align:center;margin-bottom:1.1rem}
@@ -236,16 +243,18 @@ textarea::placeholder{color:var(--mt)}
 .erow input:focus{border-color:#fff}
 .esbtn{background:#fff;color:var(--old);border:none;border-radius:8px;padding:0 1.1rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap}
 .esok{display:none;font-size:.88rem;color:var(--sgl);margin-top:.5rem}
-
 .errmsg{background:#FCEBEB;color:#A32D2D;border:.5px solid #F09595;border-radius:9px;padding:.75rem 1rem;font-size:.82rem;display:none;margin-bottom:1rem}
+
 footer{text-align:center;padding:1.5rem;font-size:.78rem;color:var(--mt);border-top:.5px solid var(--bd)}
 footer a{color:var(--ol);text-decoration:none}
 footer a:hover{text-decoration:underline}
-@media(max-width:520px){
-  .irow,.uc-features,.macro-grid,.mp-grid{grid-template-columns:1fr}
-  .erow,.pw-row,.limit-actions{flex-direction:column}
+
+@media(max-width:560px){
+  .pricing-grid,.irow,.un-features,.macro-grid,.mp-grid{grid-template-columns:1fr}
+  .erow,.pw-row{flex-direction:column}
   .strip{justify-content:center}
   .macro-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .s-links{flex-wrap:wrap;justify-content:center}
 }
 </style>
 </head>
@@ -263,15 +272,15 @@ footer a:hover{text-decoration:underline}
   <div class="s-links">
     <a class="sl ig" href="https://instagram.com/spatulaspiceandtales" target="_blank">Instagram</a>
     <a class="sl shop" href="YOUR_GUMROAD_RECIPE_PACK" target="_blank">Recipe Pack</a>
-    <a class="sl pro" id="strip-pro-btn" href="YOUR_GUMROAD_PREMIUM_LINK" target="_blank">⚡ Go Premium</a>
+    <button class="sl pro" id="strip-pro-btn" onclick="showPricing()">⚡ Go Premium</button>
   </div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hbadge" id="hero-badge">⚡ Free AI Tool</div>
+  <div class="hbadge" id="hero-badge">⚡ Recipe AI Tool</div>
   <h1>Tell me what's<br>in your fridge.<br><em>I'll make it a meal.</em></h1>
-  <p class="hero-sub">Any ingredients → meal + full macros + grocery list + IG content</p>
+  <p class="hero-sub">Any ingredients → meal + macros + grocery list + IG content</p>
   <div class="hero-pills">
     <span class="hp">⏱ Under 10 minutes</span>
     <span class="hp">💰 Budget-friendly</span>
@@ -284,19 +293,60 @@ footer a:hover{text-decoration:underline}
 </div>
 
 <!-- USAGE BAR -->
-<div class="usage-bar free-bar" id="usage-bar">
-  <div class="usage-left" id="usage-text">3 free recipes today</div>
+<div class="ubar" id="ubar">
+  <div class="uleft" id="uleft">3 free recipes today</div>
   <div style="display:flex;align-items:center;gap:10px">
-    <div class="usage-dots" id="usage-dots">
+    <div class="udots" id="udots">
       <div class="udot" id="dot-1"></div>
       <div class="udot" id="dot-2"></div>
       <div class="udot" id="dot-3"></div>
     </div>
-    <a class="upgrade-pill" id="upgrade-pill" href="YOUR_GUMROAD_PREMIUM_LINK" target="_blank">⚡ Unlock unlimited</a>
+    <button class="upill" id="upill" onclick="showPricing()">⚡ Unlock unlimited</button>
   </div>
 </div>
 
 <div class="main">
+
+  <!-- PRICING SECTION -->
+  <div class="pricing-section" id="pricing-section">
+    <div class="pricing-title">Unlock QuickFuel Kitchen Premium</div>
+    <div class="pricing-sub">Full macros · Grocery lists · Meal plans · Complete Creator Kit · Unlimited recipes</div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Monthly</div>
+        <div class="price-amount">$5.99</div>
+        <div class="price-period">per month · cancel anytime</div>
+        <ul class="price-features">
+          <li>Unlimited recipes</li>
+          <li>Full macro breakdown</li>
+          <li>Smart grocery list</li>
+          <li>3-meal prep plan</li>
+          <li>Full Creator Kit</li>
+          <li>25 hashtags per recipe</li>
+        </ul>
+        <button class="price-btn monthly-btn" id="monthly-btn" onclick="checkout('monthly')">Get Monthly — $5.99/mo</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge gold">Best value</div>
+        <div class="price-name">Lifetime</div>
+        <div class="price-amount">$29</div>
+        <div class="price-period">one-time · never pay again</div>
+        <ul class="price-features">
+          <li>Everything in Monthly</li>
+          <li>Lifetime access forever</li>
+          <li>All future updates</li>
+          <li>Priority support</li>
+          <li>Never expires</li>
+          <li>Pay once, own it</li>
+        </ul>
+        <button class="price-btn lifetime-btn" id="lifetime-btn" onclick="checkout('lifetime')">Get Lifetime — $29</button>
+      </div>
+    </div>
+    <div class="pricing-divider">already a member?</div>
+    <div class="pw-already">
+      <button onclick="hidePricing(); showPwGate()">Enter your password to unlock →</button>
+    </div>
+  </div>
 
   <!-- MODE TOGGLE -->
   <div class="mode-row">
@@ -353,29 +403,29 @@ footer a:hover{text-decoration:underline}
   <div class="pw-gate" id="pw-gate">
     <div class="pw-icon">🔐</div>
     <div class="pw-title">Enter your Premium password</div>
-    <div class="pw-sub">Already a Premium member? Enter your password to unlock unlimited recipes, full macros, grocery lists, meal plans, and the complete Creator Kit.</div>
+    <div class="pw-sub">Already a Premium member? Enter your password to unlock everything on this device.</div>
     <div class="pw-row">
-      <input type="password" class="pw-input" id="pw-input" placeholder="Enter password" />
+      <input type="password" class="pw-input" id="pw-input" placeholder="Enter your password" />
       <button class="pw-btn" id="pw-btn" onclick="verifyPassword()">Unlock</button>
     </div>
-    <div class="pw-err" id="pw-err">Incorrect password. Try again or get Premium below.</div>
+    <div class="pw-err" id="pw-err">Incorrect password — check your email or get Premium below.</div>
     <div class="pw-divider">don't have Premium yet?</div>
-    <a class="pw-gumroad" href="YOUR_GUMROAD_PREMIUM_LINK" target="_blank">⚡ Get Premium — $9/mo</a>
-    <div class="pw-price">Instant access · Cancel anytime</div>
+    <button class="price-btn monthly-btn" style="max-width:280px;margin:0 auto .5rem;display:block;padding:.7rem" onclick="hidePwGate();showPricing()">⚡ See Premium plans</button>
+    <br><button class="pw-back" onclick="hidePwGate()">← Back</button>
   </div>
 
   <div class="errmsg" id="errmsg"></div>
 
-  <!-- LIMIT REACHED -->
+  <!-- LIMIT CARD -->
   <div class="limit-card" id="limit-card">
-    <div class="limit-emoji">⚡</div>
-    <div class="limit-title">You've used your 3 free recipes today</div>
-    <div class="limit-sub">Upgrade to Premium for unlimited recipes, full macros, grocery lists, meal prep plans, and the complete Creator Kit.</div>
-    <div class="limit-actions">
-      <button class="limit-upgrade" onclick="window.open('YOUR_GUMROAD_PREMIUM_LINK','_blank')">⚡ Get Premium — $9/mo</button>
-      <button class="limit-pw" onclick="showPwGate()">I already have a password</button>
+    <div class="le">⚡</div>
+    <div class="lt">You've used your 3 free recipes today</div>
+    <div class="ls">Upgrade to Premium for unlimited recipes, full macros, grocery lists, meal prep plans, and the complete Creator Kit.</div>
+    <div class="lacts">
+      <button class="lact-up" onclick="hideLimitCard();showPricing()">⚡ See Premium plans</button>
+      <button class="lact-pw" onclick="hideLimitCard();showPwGate()">I already have a password</button>
     </div>
-    <div class="limit-reset">Free limit resets every 24 hours</div>
+    <div class="lreset">Free limit resets every 24 hours</div>
   </div>
 
   <!-- LOADING -->
@@ -396,108 +446,67 @@ footer a:hover{text-decoration:underline}
       <div class="itags" id="r-ings"></div>
       <div class="slabel">Steps</div>
       <ol class="slist" id="r-steps"></ol>
-
       <div class="irow">
         <div class="ibox nut"><div class="ibox-l">Nutrition snapshot</div><p id="r-nut"></p></div>
         <div class="ibox bud"><div class="ibox-l">💰 Budget tip</div><p id="r-bud"></p></div>
       </div>
 
-      <!-- FREE: LOCKED SECTIONS -->
-      <div id="free-locked-sections">
-        <div class="locked-section">
-          <div class="lock-row">
-            <div class="lock-icon">🔒</div>
-            <div><div class="lock-title">Full macro breakdown</div><div class="lock-desc">Calories · Protein · Carbs · Fat · Fiber — exact numbers</div></div>
-          </div>
-          <div class="lock-preview">Calories: ███ kcal &nbsp;|&nbsp; Protein: ██g &nbsp;|&nbsp; Carbs: ██g &nbsp;|&nbsp; Fat: ██g &nbsp;|&nbsp; Fiber: ██g</div>
-          <div class="lock-footer">
-            <button class="unlock-btn" onclick="window.open('YOUR_GUMROAD_PREMIUM_LINK','_blank')">⚡ Get Premium</button>
-            <button class="have-pw" onclick="showPwGate()">I have a password</button>
-          </div>
+      <!-- FREE LOCKED -->
+      <div id="free-locked">
+        <div class="lsec">
+          <div class="lrow"><div class="licon">🔒</div><div><div class="ltitle">Full macro breakdown</div><div class="ldesc">Calories · Protein · Carbs · Fat · Fiber — exact numbers</div></div></div>
+          <div class="lpreview">Calories: ███ kcal | Protein: ██g | Carbs: ██g | Fat: ██g | Fiber: ██g</div>
+          <div class="lfooter"><button class="unlock-btn" onclick="showPricing()">⚡ Get Premium</button><button class="have-pw" onclick="showPwGate()">I have a password</button></div>
         </div>
-        <div class="locked-section">
-          <div class="lock-row">
-            <div class="lock-icon">🔒</div>
-            <div><div class="lock-title">Smart grocery list</div><div class="lock-desc">What you have · What to buy · Estimated cost · Budget swaps</div></div>
-          </div>
-          <div class="lock-preview">✓ Have: chicken, garlic<br>🛒 Need: sesame oil (~$0.50), green onions (~$0.80)<br>💰 Swap: vegetable oil works fine</div>
-          <div class="lock-footer">
-            <button class="unlock-btn" onclick="window.open('YOUR_GUMROAD_PREMIUM_LINK','_blank')">⚡ Get Premium</button>
-            <button class="have-pw" onclick="showPwGate()">I have a password</button>
-          </div>
+        <div class="lsec">
+          <div class="lrow"><div class="licon">🔒</div><div><div class="ltitle">Smart grocery list</div><div class="ldesc">What you have · What to buy · Estimated cost · Budget swaps</div></div></div>
+          <div class="lpreview">✓ Have: chicken, garlic<br>🛒 Need: sesame oil (~$0.50), green onions (~$0.80)<br>💰 Swap: vegetable oil works fine</div>
+          <div class="lfooter"><button class="unlock-btn" onclick="showPricing()">⚡ Get Premium</button><button class="have-pw" onclick="showPwGate()">I have a password</button></div>
         </div>
-        <div class="locked-section">
-          <div class="lock-row">
-            <div class="lock-icon">🔒</div>
-            <div><div class="lock-title">3-meal prep plan</div><div class="lock-desc">Turn this into 3 different meals for the week</div></div>
-          </div>
-          <div class="lock-preview">Monday: original recipe · Wednesday: remix version · Friday: 5-min leftover meal</div>
-          <div class="lock-footer">
-            <button class="unlock-btn" onclick="window.open('YOUR_GUMROAD_PREMIUM_LINK','_blank')">⚡ Get Premium</button>
-            <button class="have-pw" onclick="showPwGate()">I have a password</button>
-          </div>
+        <div class="lsec">
+          <div class="lrow"><div class="licon">🔒</div><div><div class="ltitle">3-meal prep plan</div><div class="ldesc">Turn this into 3 different meals for the week</div></div></div>
+          <div class="lpreview">Monday: original · Wednesday: remix · Friday: 5-min leftover meal</div>
+          <div class="lfooter"><button class="unlock-btn" onclick="showPricing()">⚡ Get Premium</button><button class="have-pw" onclick="showPwGate()">I have a password</button></div>
         </div>
-        <div class="locked-section">
-          <div class="lock-row">
-            <div class="lock-icon">🔒</div>
-            <div><div class="lock-title">Full Creator Kit</div><div class="lock-desc">Hook · Caption · Punchline · 25 hashtags · Pinned comment · Story poll · 5 replies</div></div>
-          </div>
-          <div class="lock-preview">Hook: "It's 6pm, you're tired, and this took 8 minutes 🔥"<br>Hashtags: #QuickMeals #MealPrep + 22 more niche tags<br>Story poll: "Would you try this? 👆 Yes / 👇 Needs hot sauce"</div>
-          <div class="lock-footer">
-            <button class="unlock-btn" onclick="window.open('YOUR_GUMROAD_PREMIUM_LINK','_blank')">⚡ Get Premium</button>
-            <button class="have-pw" onclick="showPwGate()">I have a password</button>
-          </div>
+        <div class="lsec">
+          <div class="lrow"><div class="licon">🔒</div><div><div class="ltitle">Full Creator Kit</div><div class="ldesc">Hook · Caption · Punchline · 25 hashtags · Pinned comment · Story poll · 5 replies</div></div></div>
+          <div class="lpreview">Hook: "It's 6pm, you're tired, and this took 8 minutes 🔥"<br>25 hashtags + pinned comment + story poll + 5 comment replies</div>
+          <div class="lfooter"><button class="unlock-btn" onclick="showPricing()">⚡ Get Premium</button><button class="have-pw" onclick="showPwGate()">I have a password</button></div>
         </div>
       </div>
 
-      <!-- PREMIUM: UNLOCKED SECTIONS -->
+      <!-- PREMIUM UNLOCKED -->
       <div id="premium-sections" style="display:none">
-
-        <!-- MACROS -->
-        <div class="premium-section" id="pm-macros">
-          <div class="ps-badge">📊 Full macro breakdown</div>
+        <div class="psec" id="pm-macros">
+          <div class="psbadge" id="pm-macros-badge">📊 Full macro breakdown</div>
           <div class="macro-grid" id="r-macros"></div>
-          <div class="calc-panel" id="macro-bars"></div>
+          <div id="macro-bars" style="margin-top:.75rem"></div>
         </div>
-
-        <!-- GROCERY LIST -->
-        <div class="premium-section" id="pm-grocery">
-          <div class="ps-badge">🛒 Smart grocery list</div>
-          <ul class="grocery-list" id="r-grocery"></ul>
+        <div class="psec" id="pm-grocery">
+          <div class="psbadge" id="pm-grocery-badge">🛒 Smart grocery list</div>
+          <ul class="glist" id="r-grocery"></ul>
         </div>
-
-        <!-- MEAL PLAN -->
-        <div class="premium-section" id="pm-mealplan">
-          <div class="ps-badge">📅 3-meal prep plan</div>
+        <div class="psec" id="pm-mealplan">
+          <div class="psbadge" id="pm-mp-badge">📅 3-meal prep plan</div>
           <div class="mp-grid" id="r-mealplan"></div>
         </div>
-
-        <!-- CREATOR KIT -->
-        <div class="premium-section" id="pm-creator">
-          <div class="ps-badge">📱 Full Creator Kit</div>
-          <div class="slabel premium-label" style="margin-top:.5rem">Hook</div>
-          <div class="cblock hook" id="pm-hook"></div>
-          <button class="cpbtn" onclick="cp('pm-hook',this)">Copy hook</button>
-          <div class="slabel premium-label">Caption</div>
-          <div class="cblock" id="pm-caption"></div>
-          <button class="cpbtn" onclick="cp('pm-caption',this)">Copy caption</button>
-          <div class="slabel premium-label">Punchline</div>
-          <div class="cblock" id="pm-punchline"></div>
-          <button class="cpbtn" onclick="cp('pm-punchline',this)">Copy punchline</button>
-          <div class="slabel premium-label">Hashtags (25)</div>
-          <div class="cblock tags" id="pm-hashtags"></div>
-          <button class="cpbtn" onclick="cp('pm-hashtags',this)">Copy hashtags</button>
-          <div class="slabel premium-label">Pinned comment</div>
-          <div class="cblock" id="pm-pinned"></div>
-          <button class="cpbtn" onclick="cp('pm-pinned',this)">Copy pinned comment</button>
-          <div class="slabel premium-label">Story poll</div>
-          <div class="cblock poll" id="pm-poll"></div>
-          <button class="cpbtn" onclick="cp('pm-poll',this)">Copy story poll</button>
-          <div class="slabel premium-label">Comment replies (5)</div>
-          <div class="cblock" id="pm-replies"></div>
-          <button class="cpbtn" onclick="cp('pm-replies',this)">Copy replies</button>
+        <div class="psec" id="pm-creator">
+          <div class="psbadge" id="pm-ck-badge">📱 Full Creator Kit</div>
+          <div class="slabel pl" style="margin-top:.5rem">Hook</div>
+          <div class="cblock hook" id="pm-hook"></div><button class="cpbtn" onclick="cp('pm-hook',this)">Copy hook</button>
+          <div class="slabel pl">Caption</div>
+          <div class="cblock" id="pm-caption"></div><button class="cpbtn" onclick="cp('pm-caption',this)">Copy caption</button>
+          <div class="slabel pl">Punchline</div>
+          <div class="cblock" id="pm-punchline"></div><button class="cpbtn" onclick="cp('pm-punchline',this)">Copy punchline</button>
+          <div class="slabel pl">Hashtags (25)</div>
+          <div class="cblock tags" id="pm-hashtags"></div><button class="cpbtn" onclick="cp('pm-hashtags',this)">Copy hashtags</button>
+          <div class="slabel pl">Pinned comment</div>
+          <div class="cblock" id="pm-pinned"></div><button class="cpbtn" onclick="cp('pm-pinned',this)">Copy pinned comment</button>
+          <div class="slabel pl">Story poll</div>
+          <div class="cblock poll" id="pm-poll"></div><button class="cpbtn" onclick="cp('pm-poll',this)">Copy story poll</button>
+          <div class="slabel pl">Comment replies (5)</div>
+          <div class="cblock" id="pm-replies"></div><button class="cpbtn" onclick="cp('pm-replies',this)">Copy replies</button>
         </div>
-
       </div>
 
       <div class="arow">
@@ -507,23 +516,23 @@ footer a:hover{text-decoration:underline}
     </div>
   </div>
 
-  <!-- UPGRADE CARD (shows after free recipe) -->
-  <div class="upgrade-card" id="upgrade-card">
-    <div class="uc-title">Unlock everything above</div>
-    <div class="uc-sub">Full macros, grocery list, meal prep plan, and the complete Creator Kit — for every recipe you generate, unlimited.</div>
-    <div class="uc-features">
-      <div class="uc-feat">📊 Full macro breakdown</div>
-      <div class="uc-feat">🛒 Smart grocery list</div>
-      <div class="uc-feat">📅 3-meal prep plan</div>
-      <div class="uc-feat">📱 Full Creator Kit</div>
-      <div class="uc-feat">♾️ Unlimited recipes</div>
-      <div class="uc-feat">🔬 Nutrition calculator</div>
+  <!-- UPGRADE NUDGE (after free recipe) -->
+  <div class="upgrade-nudge" id="upgrade-nudge">
+    <div class="un-title">Unlock everything above</div>
+    <div class="un-sub">Full macros, grocery list, 3-meal prep plan, and the complete Creator Kit — unlimited.</div>
+    <div class="un-features">
+      <div class="un-feat">📊 Full macros</div>
+      <div class="un-feat">🛒 Grocery list</div>
+      <div class="un-feat">📅 Meal prep plan</div>
+      <div class="un-feat">📱 Full Creator Kit</div>
+      <div class="un-feat">♾️ Unlimited recipes</div>
+      <div class="un-feat">💾 All future updates</div>
     </div>
-    <div class="uc-actions">
-      <button class="uc-buy" onclick="window.open('YOUR_GUMROAD_PREMIUM_LINK','_blank')">⚡ Get Premium — $9/mo</button>
-      <button class="uc-pw" onclick="showPwGate()">I already have a password →</button>
+    <div class="un-actions">
+      <button class="un-buy" onclick="showPricing()">⚡ See Premium plans — from $5.99/mo</button>
+      <button class="un-pw" onclick="showPwGate()">I already have a password →</button>
     </div>
-    <div class="uc-price">Cancel anytime · Instant access · No contracts</div>
+    <div class="un-price">Monthly $5.99/mo · Lifetime $29 once · Cancel anytime</div>
   </div>
 
   <!-- CONTENT RESULT -->
@@ -531,27 +540,17 @@ footer a:hover{text-decoration:underline}
     <div class="rhead"><div class="rtbadge">✨ Ready to post</div><h2>Your IG Content</h2></div>
     <div class="rbody">
       <div class="slabel">Hook</div>
-      <div class="cblock hook" id="cr-hook"></div>
-      <button class="cpbtn" onclick="cp('cr-hook',this)">Copy hook</button>
+      <div class="cblock hook" id="cr-hook"></div><button class="cpbtn" onclick="cp('cr-hook',this)">Copy hook</button>
       <div class="slabel">Caption · Spatula · Spice · Tale</div>
-      <div class="cblock" id="cr-cap"></div>
-      <button class="cpbtn" onclick="cp('cr-cap',this)">Copy caption</button>
+      <div class="cblock" id="cr-cap"></div><button class="cpbtn" onclick="cp('cr-cap',this)">Copy caption</button>
       <div class="slabel">Punchline</div>
-      <div class="cblock" id="cr-punch"></div>
-      <button class="cpbtn" onclick="cp('cr-punch',this)">Copy punchline</button>
-      <div class="slabel">Hashtags <span style="font-size:10px;color:var(--mt);font-weight:400;margin-left:4px">(5 free — upgrade for all 25)</span></div>
-      <div class="cblock tags" id="cr-tags"></div>
-      <button class="cpbtn" onclick="cp('cr-tags',this)">Copy hashtags</button>
-      <div class="locked-section">
-        <div class="lock-row">
-          <div class="lock-icon">🔒</div>
-          <div><div class="lock-title">Full Creator Kit</div><div class="lock-desc">All 25 hashtags · Pinned comment · Story poll · 5 comment replies</div></div>
-        </div>
-        <div class="lock-preview">Pinned: "Recipe in my bio 🌿 Save this for tonight!"<br>Story poll: "Rate this meal 🍳 Fire / Needs seasoning 😅"</div>
-        <div class="lock-footer">
-          <button class="unlock-btn" onclick="window.open('YOUR_GUMROAD_PREMIUM_LINK','_blank')">⚡ Get Premium</button>
-          <button class="have-pw" onclick="showPwGate()">I have a password</button>
-        </div>
+      <div class="cblock" id="cr-punch"></div><button class="cpbtn" onclick="cp('cr-punch',this)">Copy punchline</button>
+      <div class="slabel">Hashtags <span style="font-size:10px;color:var(--mt);font-weight:400;margin-left:4px">(5 free · upgrade for all 25)</span></div>
+      <div class="cblock tags" id="cr-tags"></div><button class="cpbtn" onclick="cp('cr-tags',this)">Copy hashtags</button>
+      <div class="lsec">
+        <div class="lrow"><div class="licon">🔒</div><div><div class="ltitle">Full Creator Kit</div><div class="ldesc">All 25 hashtags · Pinned comment · Story poll · 5 comment replies</div></div></div>
+        <div class="lpreview">Pinned: "Recipe in my bio 🌿 Save this!"<br>Poll: "Rate this meal 🍳 Fire / Needs seasoning 😅"</div>
+        <div class="lfooter"><button class="unlock-btn" onclick="showPricing()">⚡ Get Premium</button><button class="have-pw" onclick="showPwGate()">I have a password</button></div>
       </div>
       <div class="arow">
         <button class="abtn gh" onclick="reset()">🔄 Start over</button>
@@ -569,7 +568,6 @@ footer a:hover{text-decoration:underline}
     </div>
     <div class="esok" id="esok">✓ You're in! See you Sunday 🌿</div>
   </div>
-
 </div>
 
 <footer>
@@ -580,8 +578,8 @@ footer a:hover{text-decoration:underline}
 
 <script>
 // ── SYSTEM PROMPTS ─────────────────────────────────────────────────────────
-const FREE_SYS = `You are QuickFuel Kitchen — a friendly warm AI for Spatula Spice & Tales.
-RULES: Recipes must take 10 minutes or less. Affordable accessible ingredients. Simple beginner-friendly steps. Balanced nutrition. No complex techniques.
+const FREE_SYS=`You are QuickFuel Kitchen — friendly warm AI for Spatula Spice & Tales.
+RULES: 10 minutes or less. Affordable ingredients. Simple steps. Balanced nutrition.
 OUTPUT FORMAT (use EXACTLY):
 DISH_NAME: [name]
 TIME: [e.g. 8 minutes]
@@ -590,12 +588,12 @@ INGREDIENTS:
 STEPS:
 1. [step]
 NUTRITION: [1-2 sentence snapshot]
-BUDGET_TIP: [one practical tip]
+BUDGET_TIP: [one tip]
 Max 6 steps. Warm friendly tone.`;
 
-const PREMIUM_SYS = `You are QuickFuel Kitchen Premium — the full AI kitchen assistant for Spatula Spice & Tales.
-RULES: Recipes 10 minutes or less. Affordable ingredients. Simple steps. Balanced nutrition.
-OUTPUT FORMAT (use EXACTLY — all sections required):
+const PREMIUM_SYS=`You are QuickFuel Kitchen Premium — full AI kitchen assistant for Spatula Spice & Tales.
+RULES: 10 minutes or less. Affordable ingredients. Simple steps. Balanced nutrition.
+OUTPUT FORMAT (use EXACTLY — every section required):
 DISH_NAME: [name]
 TIME: [e.g. 8 minutes]
 INGREDIENTS:
@@ -603,385 +601,309 @@ INGREDIENTS:
 STEPS:
 1. [step]
 NUTRITION: [1-2 sentence snapshot]
-BUDGET_TIP: [one practical tip]
+BUDGET_TIP: [one tip]
 MACROS:
-CALORIES: [number]
-PROTEIN: [number]g
-CARBS: [number]g
-FAT: [number]g
-FIBER: [number]g
+CALORIES: [number only]
+PROTEIN: [number only]g
+CARBS: [number only]g
+FAT: [number only]g
+FIBER: [number only]g
 GROCERY_LIST:
 HAVE: [item] | [item] | [item]
 NEED: [item ~$price] | [item ~$price]
-SWAP: [budget swap tip]
+SWAP: [one budget swap tip]
 MEAL_PLAN:
 DAY1_NAME: [meal name]
-DAY1_NOTE: [one line how to prep/remix]
+DAY1_NOTE: [one line prep note]
 DAY3_NAME: [meal name]
 DAY3_NOTE: [one line]
 DAY5_NAME: [meal name]
 DAY5_NOTE: [one line]
 CREATOR_KIT:
-HOOK: [scroll-stopping relatable hook, 1-2 lines]
-CAPTION: [Spatula·Spice·Tale format — cooking action, flavor, emotion — 4-6 lines]
+HOOK: [scroll-stopping relatable hook 1-2 lines]
+CAPTION: [Spatula·Spice·Tale — action, flavor, emotion — 4-6 lines]
 PUNCHLINE: [short catchy 1 line]
-HASHTAGS: [exactly 25 hashtags, mix broad + niche]
+HASHTAGS: [exactly 25 hashtags mix broad + niche]
 PINNED: [pinned comment text]
-POLL: [story poll question with two options]
+POLL: [story poll with two options]
 REPLY1: [comment reply]
 REPLY2: [comment reply]
 REPLY3: [comment reply]
 REPLY4: [comment reply]
 REPLY5: [comment reply]`;
 
-const CONTENT_FREE_SYS = `You are the IG content voice of Spatula Spice & Tales (@spatulaspiceandtales).
+const CONTENT_SYS=`You are the IG content voice of Spatula Spice & Tales (@spatulaspiceandtales).
 Spatula·Spice·Tale: Spatula=action/texture. Spice=flavor/sensory. Tale=emotion/lifestyle.
 OUTPUT FORMAT (use EXACTLY):
 HOOK: [1-2 lines]
-CAPTION: [4-6 lines, storytelling]
+CAPTION: [4-6 lines storytelling]
 PUNCHLINE: [1 line]
 HASHTAGS: [5 hashtags only]
-Tone: warm, human, real.`;
+Tone: warm human real.`;
 
 // ── STATE ──────────────────────────────────────────────────────────────────
-let mode = 'recipe', pref = '', ct = 'Reel caption', loadTmr;
-let isPremium = false;
-let storedPassword = localStorage.getItem('qf_pw') || '';
-let usageCount = parseInt(localStorage.getItem('qf_usage') || '0');
-let usageDate = localStorage.getItem('qf_date') || '';
+let isPremium=false, tier='free', storedPw=localStorage.getItem('qf_pw')||'';
+let usageCount=parseInt(localStorage.getItem('qf_usage')||'0');
+let usageDate=localStorage.getItem('qf_date')||'';
+let mode='recipe', pref='', ct='Reel caption', loadTmr;
 
 // ── INIT ───────────────────────────────────────────────────────────────────
-async function init() {
+async function init(){
   checkUsageReset();
-  if (storedPassword) {
-    const valid = await silentValidate(storedPassword);
-    if (valid) activatePremium(storedPassword, false);
+  // Check URL success param (returning from Stripe)
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('success')){
+    history.replaceState({},'',window.location.pathname);
+    showPwGate();
+    document.getElementById('pw-sub').textContent='Payment successful! Check your email for your password, then enter it below to unlock Premium.';
   }
+  if(storedPw){ const v=await silentValidate(storedPw); if(v.valid) activatePremium(storedPw,v.tier,false); }
   updateUsageBar();
 }
 
-async function silentValidate(pw) {
-  try {
-    const res = await fetch('/api/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ system: ' ', userMessage: ' ', mode: 'validate_password', password: pw })
-    });
-    const data = await res.json();
-    return data.valid === true;
-  } catch { return false; }
+async function silentValidate(pw){
+  try{
+    const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:' ',userMessage:' ',mode:'validate_password',password:pw})});
+    const d=await r.json(); return{valid:d.valid===true,tier:d.tier||'free'};
+  }catch{return{valid:false,tier:'free'};}
 }
 
-function activatePremium(pw, save = true) {
-  isPremium = true;
-  if (save) { localStorage.setItem('qf_pw', pw); storedPassword = pw; }
-  // Update UI
-  document.getElementById('strip-pro-btn').textContent = '⚡ Premium Active';
-  document.getElementById('strip-pro-btn').className = 'sl pro-active';
-  document.getElementById('strip-pro-btn').removeAttribute('href');
-  document.getElementById('hero-badge').textContent = '⚡ Premium';
-  const bar = document.getElementById('usage-bar');
-  bar.className = 'usage-bar premium-bar';
-  document.getElementById('usage-text').textContent = '⚡ Premium — unlimited recipes';
-  document.getElementById('usage-text').className = 'usage-left premium-left';
-  document.getElementById('usage-dots').style.display = 'none';
-  document.getElementById('upgrade-pill').textContent = '✓ Premium active';
-  document.getElementById('upgrade-pill').style.background = '#EEF2E8';
-  document.getElementById('upgrade-pill').style.color = 'var(--old)';
-  document.getElementById('upgrade-pill').style.borderColor = 'var(--sgl)';
-  document.getElementById('upgrade-pill').removeAttribute('href');
-  hidePwGate();
+function activatePremium(pw,t,save=true){
+  isPremium=true; tier=t;
+  if(save){localStorage.setItem('qf_pw',pw); storedPw=pw;}
+  const isLife=t==='lifetime';
+  // Strip
+  const btn=document.getElementById('strip-pro-btn');
+  btn.textContent=isLife?'👑 Lifetime Active':'⚡ Premium Active';
+  btn.className='sl pro-active'; btn.onclick=null;
+  // Badge
+  document.getElementById('hero-badge').textContent=isLife?'👑 Lifetime Access':'⚡ Premium';
+  // Usage bar
+  const ubar=document.getElementById('ubar');
+  ubar.className='ubar '+(isLife?'lifetime':'premium');
+  document.getElementById('uleft').textContent=isLife?'👑 Lifetime access — unlimited':'⚡ Premium — unlimited recipes';
+  document.getElementById('udots').style.display='none';
+  const pill=document.getElementById('upill');
+  pill.textContent=isLife?'👑 Lifetime':'✓ Premium active';
+  pill.style.background=isLife?'var(--goldbg)':'var(--sgxl)';
+  pill.style.color=isLife?'var(--gold)':'var(--old)';
+  pill.style.borderColor=isLife?'var(--goldbd)':'var(--sgl)';
+  pill.onclick=null;
+  // Premium badge colors for lifetime
+  if(isLife){
+    document.querySelectorAll('.psbadge').forEach(b=>b.classList.add('gold'));
+  }
+  hidePwGate(); hidePricing();
 }
 
-// ── PASSWORD GATE ──────────────────────────────────────────────────────────
-function showPwGate() {
-  hideAll();
-  document.getElementById('pw-gate').classList.add('show');
-  document.getElementById('pw-gate').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  setTimeout(() => document.getElementById('pw-input').focus(), 300);
-}
-
-function hidePwGate() {
-  document.getElementById('pw-gate').classList.remove('show');
-}
-
-async function verifyPassword() {
-  const pw = document.getElementById('pw-input').value.trim();
-  if (!pw) return;
-  const btn = document.getElementById('pw-btn');
-  btn.disabled = true;
-  btn.textContent = 'Checking…';
-  const valid = await silentValidate(pw);
-  if (valid) {
-    activatePremium(pw);
-    btn.textContent = '✓ Unlocked!';
-    setTimeout(() => {
-      hidePwGate();
-      reset();
-    }, 800);
-  } else {
-    document.getElementById('pw-err').style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = 'Unlock';
-    document.getElementById('pw-input').focus();
+// ── STRIPE CHECKOUT ────────────────────────────────────────────────────────
+async function checkout(plan){
+  const btn=document.getElementById(plan+'-btn');
+  btn.disabled=true; btn.textContent='Redirecting…';
+  try{
+    const r=await fetch('/api/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan})});
+    const d=await r.json();
+    if(d.url) window.location.href=d.url;
+    else throw new Error(d.error||'Failed to create checkout');
+  }catch(e){
+    btn.disabled=false;
+    btn.textContent=plan==='monthly'?'Get Monthly — $5.99/mo':'Get Lifetime — $29';
+    alert('Something went wrong: '+e.message);
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('pw-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') verifyPassword();
-  });
+// ── UI SHOW/HIDE ───────────────────────────────────────────────────────────
+function showPricing(){hidePwGate();document.getElementById('pricing-section').classList.add('show');document.getElementById('pricing-section').scrollIntoView({behavior:'smooth',block:'nearest'});}
+function hidePricing(){document.getElementById('pricing-section').classList.remove('show');}
+function showPwGate(){hidePricing();document.getElementById('pw-gate').classList.add('show');document.getElementById('pw-gate').scrollIntoView({behavior:'smooth',block:'nearest'});setTimeout(()=>document.getElementById('pw-input').focus(),300);}
+function hidePwGate(){document.getElementById('pw-gate').classList.remove('show');}
+function showLimitCard(){document.getElementById('limit-card').classList.add('show');document.getElementById('limit-card').scrollIntoView({behavior:'smooth',block:'nearest'});}
+function hideLimitCard(){document.getElementById('limit-card').classList.remove('show');}
+
+async function verifyPassword(){
+  const pw=document.getElementById('pw-input').value.trim();
+  if(!pw) return;
+  const btn=document.getElementById('pw-btn'); btn.disabled=true; btn.textContent='Checking…';
+  const v=await silentValidate(pw);
+  if(v.valid){ activatePremium(pw,v.tier); btn.textContent='✓ Unlocked!'; setTimeout(()=>{hidePwGate();reset();},700); }
+  else{ document.getElementById('pw-err').style.display='block'; btn.disabled=false; btn.textContent='Unlock'; document.getElementById('pw-input').focus(); }
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('pw-input').addEventListener('keydown',e=>{ if(e.key==='Enter') verifyPassword(); });
 });
 
-// ── USAGE ─────────────────────────────────────────────────────────────────
-function checkUsageReset() {
-  const today = new Date().toDateString();
-  if (usageDate !== today) { usageCount = 0; usageDate = today; saveUsage(); }
-}
-function saveUsage() {
-  localStorage.setItem('qf_usage', usageCount);
-  localStorage.setItem('qf_date', usageDate);
-}
-function updateUsageBar() {
-  if (isPremium) return;
+// ── USAGE ──────────────────────────────────────────────────────────────────
+function checkUsageReset(){const today=new Date().toDateString();if(usageDate!==today){usageCount=0;usageDate=today;saveUsage();}}
+function saveUsage(){localStorage.setItem('qf_usage',usageCount);localStorage.setItem('qf_date',usageDate);}
+function updateUsageBar(){
+  if(isPremium) return;
   checkUsageReset();
-  const rem = Math.max(0, 3 - usageCount);
-  document.getElementById('usage-text').textContent = rem + ' free recipe' + (rem !== 1 ? 's' : '') + ' today';
-  for (let i = 1; i <= 3; i++) document.getElementById('dot-' + i).classList.toggle('used', i > rem);
+  const rem=Math.max(0,3-usageCount);
+  document.getElementById('uleft').textContent=rem+' free recipe'+(rem!==1?'s':'')+' today';
+  for(let i=1;i<=3;i++) document.getElementById('dot-'+i).classList.toggle('used',i>rem);
 }
 
-// ── UI HELPERS ─────────────────────────────────────────────────────────────
-function setMode(m) {
-  mode = m;
-  document.getElementById('recipe-panel').style.display = m === 'recipe' ? 'block' : 'none';
-  document.getElementById('content-panel').style.display = m === 'content' ? 'block' : 'none';
-  document.getElementById('m-recipe').classList.toggle('on', m === 'recipe');
-  document.getElementById('m-content').classList.toggle('on', m === 'content');
-  hideAll();
-}
-function addIng(i) { const el = document.getElementById('ing-in'); el.value = el.value.trim() ? el.value.trim() + ', ' + i : i; el.focus(); }
-function setPref(p, id) { pref = p; document.querySelectorAll('[id^="p-"]').forEach(c => c.classList.remove('on')); document.getElementById(id).classList.add('on'); }
-function setCT(t, id) { ct = t; document.querySelectorAll('[id^="ct-"]').forEach(c => c.classList.remove('on')); document.getElementById(id).classList.add('on'); }
+// ── MODE / PREFS ───────────────────────────────────────────────────────────
+function setMode(m){mode=m;document.getElementById('recipe-panel').style.display=m==='recipe'?'block':'none';document.getElementById('content-panel').style.display=m==='content'?'block':'none';document.getElementById('m-recipe').classList.toggle('on',m==='recipe');document.getElementById('m-content').classList.toggle('on',m==='content');hideResults();}
+function addIng(i){const el=document.getElementById('ing-in');el.value=el.value.trim()?el.value.trim()+', '+i:i;el.focus();}
+function setPref(p,id){pref=p;document.querySelectorAll('[id^="p-"]').forEach(c=>c.classList.remove('on'));document.getElementById(id).classList.add('on');}
+function setCT(t,id){ct=t;document.querySelectorAll('[id^="ct-"]').forEach(c=>c.classList.remove('on'));document.getElementById(id).classList.add('on');}
 
-function hideAll() {
-  ['r-recipe','r-content','upgrade-card','limit-card','loading'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) { el.style.display = 'none'; el.classList && el.classList.remove('show'); }
-  });
-  document.getElementById('upgrade-card').classList.remove('show');
+function hideResults(){
+  ['r-recipe','r-content'].forEach(id=>{document.getElementById(id).style.display='none';});
+  document.getElementById('upgrade-nudge').classList.remove('show');
   document.getElementById('limit-card').classList.remove('show');
-  document.getElementById('errmsg').style.display = 'none';
+  document.getElementById('errmsg').style.display='none';
 }
-function showErr(m) { stopLoad(); const el = document.getElementById('errmsg'); el.textContent = m; el.style.display = 'block'; }
-function showLimitCard() { document.getElementById('limit-card').classList.add('show'); document.getElementById('limit-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+function showErr(m){stopLoad();document.getElementById('errmsg').textContent=m;document.getElementById('errmsg').style.display='block';}
 
 // ── LOADING ────────────────────────────────────────────────────────────────
-const rMsgs = [['Checking your ingredients…','Something good is coming 🍳'],['Finding the fastest method…','Under 10 minutes, promise ⏱'],['Building your meal…','Real food, real fast 💚'],['Almost done…','Worth it 🔥']];
-const pMsgs = [['Building your full recipe…','Premium quality incoming ⚡'],['Calculating your macros…','Every gram counted 📊'],['Building your grocery list…','Smart shopping 🛒'],['Creating your Creator Kit…','Spatula · Spice · Tale 📱'],['Almost done…','This one has everything 🔥']];
-const cMsgs = [['Writing your hook…','Making it scroll-stopping ✨'],['Crafting the caption…','Spatula · Spice · Tale 🌿'],['Adding hashtags…','Almost ready to post 📱']];
+const rMsgs=[['Checking your ingredients…','Something good is coming 🍳'],['Finding the fastest method…','Under 10 minutes, promise ⏱'],['Building your meal…','Real food, real fast 💚'],['Almost done…','Worth it 🔥']];
+const pMsgs=[['Building your full recipe…','Premium quality incoming ⚡'],['Calculating your macros…','Every gram counted 📊'],['Building your grocery list…','Smart shopping 🛒'],['Creating your Creator Kit…','Spatula · Spice · Tale 📱'],['Almost done…','This one has everything 🔥']];
+const cMsgs=[['Writing your hook…','Making it scroll-stopping ✨'],['Crafting the caption…','Spatula · Spice · Tale 🌿'],['Adding hashtags…','Almost ready to post 📱']];
 
-function startLoad(msgs) {
-  document.getElementById('loading').style.display = 'block';
-  hideAll();
-  document.getElementById('loading').style.display = 'block';
-  let i = 0;
-  document.getElementById('ltxt').textContent = msgs[0][0];
-  document.getElementById('lflav').textContent = msgs[0][1];
-  loadTmr = setInterval(() => { i = (i+1)%msgs.length; document.getElementById('ltxt').textContent = msgs[i][0]; document.getElementById('lflav').textContent = msgs[i][1]; }, 2200);
+function startLoad(msgs){
+  hideResults();
+  document.getElementById('loading').style.display='block';
+  let i=0;
+  document.getElementById('ltxt').textContent=msgs[0][0];
+  document.getElementById('lflav').textContent=msgs[0][1];
+  loadTmr=setInterval(()=>{i=(i+1)%msgs.length;document.getElementById('ltxt').textContent=msgs[i][0];document.getElementById('lflav').textContent=msgs[i][1];},2200);
 }
-function stopLoad() { clearInterval(loadTmr); document.getElementById('loading').style.display = 'none'; }
+function stopLoad(){clearInterval(loadTmr);document.getElementById('loading').style.display='none';}
 
-// ── API CALL ───────────────────────────────────────────────────────────────
-async function callAPI(system, userMessage) {
-  const res = await fetch('/api/generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ system, userMessage, mode: isPremium ? 'premium' : 'free', password: storedPassword })
-  });
-  const data = await res.json();
-  if (data.error === 'FREE_LIMIT_REACHED') throw new Error('LIMIT');
-  if (data.error) throw new Error(data.error);
-  return data.text;
+// ── API ────────────────────────────────────────────────────────────────────
+async function callAPI(system,userMessage){
+  const r=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,userMessage,mode:isPremium?'premium':'free',password:storedPw})});
+  const d=await r.json();
+  if(d.error==='FREE_LIMIT_REACHED') throw new Error('LIMIT');
+  if(d.error==='GLOBAL_LIMIT_REACHED') throw new Error('GLOBAL');
+  if(d.error) throw new Error(d.error);
+  return d.text;
 }
 
-// ── PARSE HELPER ──────────────────────────────────────────────────────────
-function gv(text, key, next) {
-  const p = next ? new RegExp(key + ':\\s*([\\s\\S]*?)(?=' + next + ':|$)', 'i') : new RegExp(key + ':\\s*([\\s\\S]*?)$', 'i');
-  const m = text.match(p); return m ? m[1].trim() : '';
-}
+function gv(text,key,next){const p=next?new RegExp(key+':\\s*([\\s\\S]*?)(?='+next+':|$)','i'):new RegExp(key+':\\s*([\\s\\S]*?)$','i');const m=text.match(p);return m?m[1].trim():'';}
 
 // ── GENERATE RECIPE ────────────────────────────────────────────────────────
-async function generate() {
+async function generate(){
   checkUsageReset();
-  if (!isPremium && usageCount >= 3) { showLimitCard(); return; }
-  const ings = document.getElementById('ing-in').value.trim();
-  if (!ings) { showErr('Tell me what ingredients you have — even 2 or 3 works!'); return; }
-  const btn = document.getElementById('gen-btn'); btn.disabled = true;
-  startLoad(isPremium ? pMsgs : rMsgs);
-  const sys = isPremium ? PREMIUM_SYS : FREE_SYS;
-  const msg = `My ingredients: ${ings}.${pref ? ' Preference: ' + pref + '.' : ''} ${isPremium ? 'Give me the full premium recipe with all sections.' : 'Give me a quick 10-minute recipe.'}`;
-  try {
-    const text = await callAPI(sys, msg);
-    if (!isPremium) { usageCount++; saveUsage(); updateUsageBar(); }
-    isPremium ? showPremiumRecipe(text) : showFreeRecipe(text);
-  } catch(e) {
-    if (e.message === 'LIMIT') { stopLoad(); showLimitCard(); }
+  if(!isPremium&&usageCount>=3){showLimitCard();return;}
+  const ings=document.getElementById('ing-in').value.trim();
+  if(!ings){showErr('Tell me what ingredients you have — even 2 or 3 works!');return;}
+  const btn=document.getElementById('gen-btn'); btn.disabled=true;
+  startLoad(isPremium?pMsgs:rMsgs);
+  try{
+    const text=await callAPI(isPremium?PREMIUM_SYS:FREE_SYS,`My ingredients: ${ings}.${pref?' Preference: '+pref+'.':''} ${isPremium?'Give me the full premium recipe.':'Give me a quick 10-minute recipe.'}`);
+    if(!isPremium){usageCount++;saveUsage();updateUsageBar();}
+    isPremium?showPremiumRecipe(text):showFreeRecipe(text);
+  }catch(e){
+    if(e.message==='LIMIT'){stopLoad();showLimitCard();}
+    else if(e.message==='GLOBAL'){stopLoad();showErr('The free tier is at capacity today — please try again tomorrow or upgrade to Premium for unlimited access.');}
     else showErr('Oops — something went wrong. Please try again!');
   }
-  btn.disabled = false;
+  btn.disabled=false;
 }
 
-// ── SHOW FREE RECIPE ───────────────────────────────────────────────────────
-function showFreeRecipe(text) {
+// ── FREE RECIPE ────────────────────────────────────────────────────────────
+function showFreeRecipe(text){
   stopLoad();
-  document.getElementById('r-rhead').className = 'rhead';
-  document.getElementById('r-badge').innerHTML = '⏱ <span id="r-time">' + (gv(text,'TIME','INGREDIENTS')||'Under 10 min') + '</span>';
-  document.getElementById('r-title').textContent = gv(text,'DISH_NAME','TIME') || 'Your Quick Meal';
-  document.getElementById('r-nut').textContent = gv(text,'NUTRITION','BUDGET_TIP') || 'Balanced meal';
-  document.getElementById('r-bud').textContent = gv(text,'BUDGET_TIP',null) || 'Swap freely!';
+  document.getElementById('r-rhead').className='rhead';
+  document.getElementById('r-badge').innerHTML='⏱ <span id="r-time">'+(gv(text,'TIME','INGREDIENTS')||'Under 10 min')+'</span>';
+  document.getElementById('r-title').textContent=gv(text,'DISH_NAME','TIME')||'Your Quick Meal';
+  document.getElementById('r-nut').textContent=gv(text,'NUTRITION','BUDGET_TIP')||'Balanced meal';
+  document.getElementById('r-bud').textContent=gv(text,'BUDGET_TIP',null)||'Swap freely!';
   renderIngs(gv(text,'INGREDIENTS','STEPS'));
   renderSteps(gv(text,'STEPS','NUTRITION'));
-  document.getElementById('free-locked-sections').style.display = 'block';
-  document.getElementById('premium-sections').style.display = 'none';
-  document.getElementById('r-recipe').style.display = 'block';
-  document.getElementById('upgrade-card').classList.add('show');
-  document.getElementById('r-recipe').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  document.getElementById('free-locked').style.display='block';
+  document.getElementById('premium-sections').style.display='none';
+  document.getElementById('r-recipe').style.display='block';
+  document.getElementById('upgrade-nudge').classList.add('show');
+  document.getElementById('r-recipe').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-// ── SHOW PREMIUM RECIPE ────────────────────────────────────────────────────
-function showPremiumRecipe(text) {
+// ── PREMIUM RECIPE ─────────────────────────────────────────────────────────
+function showPremiumRecipe(text){
   stopLoad();
-  document.getElementById('r-rhead').className = 'rhead premium-head';
-  document.getElementById('r-badge').innerHTML = '⚡ Premium · <span id="r-time">' + (gv(text,'TIME','INGREDIENTS')||'Under 10 min') + '</span>';
-  document.getElementById('r-title').textContent = gv(text,'DISH_NAME','TIME') || 'Your Premium Recipe';
-  document.getElementById('r-nut').textContent = gv(text,'NUTRITION','BUDGET_TIP') || 'Balanced meal';
-  document.getElementById('r-bud').textContent = gv(text,'BUDGET_TIP','MACROS') || 'Swap freely!';
+  const isLife=tier==='lifetime';
+  document.getElementById('r-rhead').className='rhead '+(isLife?'lh':'ph');
+  document.getElementById('r-badge').innerHTML=(isLife?'👑 Lifetime · ':'⚡ Premium · ')+'<span id="r-time">'+(gv(text,'TIME','INGREDIENTS')||'Under 10 min')+'</span>';
+  document.getElementById('r-title').textContent=gv(text,'DISH_NAME','TIME')||'Your Premium Recipe';
+  document.getElementById('r-nut').textContent=gv(text,'NUTRITION','BUDGET_TIP')||'Balanced meal';
+  document.getElementById('r-bud').textContent=gv(text,'BUDGET_TIP','MACROS')||'Swap freely!';
   renderIngs(gv(text,'INGREDIENTS','STEPS'));
   renderSteps(gv(text,'STEPS','NUTRITION'));
 
   // MACROS
-  const macroData = [
-    { key:'CALORIES', label:'Calories', unit:'kcal', color:'#4A5C2E', next:'PROTEIN' },
-    { key:'PROTEIN', label:'Protein', unit:'g', color:'#5C6B3A', next:'CARBS' },
-    { key:'CARBS', label:'Carbs', unit:'g', color:'#C4872A', next:'FAT' },
-    { key:'FAT', label:'Fat', unit:'g', color:'#6B4A9B', next:'FIBER' },
-    { key:'FIBER', label:'Fiber', unit:'g', color:'#2A9CA4', next:'GROCERY_LIST' },
-  ];
-  const macros = gv(text,'MACROS','GROCERY_LIST');
-  document.getElementById('r-macros').innerHTML = macroData.map(m => {
-    const raw = gv(macros, m.key, m.next).replace(/[^\d.]/g,'');
-    const val = parseFloat(raw) || 0;
-    return `<div class="mbox"><div class="mval">${Math.round(val)}</div><div class="munit">${m.unit}</div><div class="mlbl">${m.label}</div></div>`;
-  }).join('');
+  const macros=gv(text,'MACROS','GROCERY_LIST');
+  const mDefs=[{k:'CALORIES',l:'Calories',u:'kcal',c:'#4A5C2E',n:'PROTEIN'},{k:'PROTEIN',l:'Protein',u:'g',c:'#5C6B3A',n:'CARBS'},{k:'CARBS',l:'Carbs',u:'g',c:'#C4872A',n:'FAT'},{k:'FAT',l:'Fat',u:'g',c:'#6B4A9B',n:'FIBER'},{k:'FIBER',l:'Fiber',u:'g',c:'#2A9CA4',n:'GROCERY_LIST'}];
+  document.getElementById('r-macros').innerHTML=mDefs.map(m=>{const v=parseFloat(gv(macros,m.k,m.n).replace(/[^\d.]/g,''))||0;return`<div class="mbox"><div class="mval">${Math.round(v)}</div><div class="munit">${m.u}</div><div class="mlbl">${m.l}</div></div>`;}).join('');
 
   // MACRO BARS
-  const calVal = parseFloat(gv(macros,'CALORIES','PROTEIN').replace(/[^\d.]/g,'')) || 1;
-  const protVal = parseFloat(gv(macros,'PROTEIN','CARBS').replace(/[^\d.]/g,'')) || 0;
-  const carbVal = parseFloat(gv(macros,'CARBS','FAT').replace(/[^\d.]/g,'')) || 0;
-  const fatVal = parseFloat(gv(macros,'FAT','FIBER').replace(/[^\d.]/g,'')) || 0;
-  const calFromMacros = (protVal * 4) + (carbVal * 4) + (fatVal * 9) || 1;
-  const bars = [
-    { label:'Protein', pct: Math.round(protVal*4/calFromMacros*100), color:'#5C6B3A' },
-    { label:'Carbs', pct: Math.round(carbVal*4/calFromMacros*100), color:'#C4872A' },
-    { label:'Fat', pct: Math.round(fatVal*9/calFromMacros*100), color:'#6B4A9B' },
-  ];
-  document.getElementById('macro-bars').innerHTML = '<div style="font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--pr);margin-bottom:.6rem">Calorie split</div>' +
-    bars.map(b => `<div class="calc-item" style="margin-bottom:6px"><div style="display:flex;justify-content:space-between"><span class="calc-label">${b.label}</span><span class="calc-pct">${b.pct}%</span></div><div class="calc-bar-track"><div class="calc-bar-fill" style="width:${b.pct}%;background:${b.color}"></div></div></div>`).join('');
+  const pv=parseFloat(gv(macros,'PROTEIN','CARBS').replace(/[^\d.]/g,''))||0;
+  const cv=parseFloat(gv(macros,'CARBS','FAT').replace(/[^\d.]/g,''))||0;
+  const fv=parseFloat(gv(macros,'FAT','FIBER').replace(/[^\d.]/g,''))||0;
+  const tot=(pv*4)+(cv*4)+(fv*9)||1;
+  document.getElementById('macro-bars').innerHTML='<div style="font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--pr);margin-bottom:.6rem">Calorie split</div>'+
+    [{l:'Protein',p:Math.round(pv*4/tot*100),c:'#5C6B3A'},{l:'Carbs',p:Math.round(cv*4/tot*100),c:'#C4872A'},{l:'Fat',p:Math.round(fv*9/tot*100),c:'#6B4A9B'}]
+    .map(b=>`<div class="bar-row"><div class="bar-lrow"><span>${b.l}</span><span>${b.p}%</span></div><div class="bar-track"><div class="bar-fill" style="width:${b.p}%;background:${b.c}"></div></div></div>`).join('');
 
-  // GROCERY LIST
-  const groceryRaw = gv(text,'GROCERY_LIST','MEAL_PLAN');
-  const haveRaw = gv(groceryRaw,'HAVE','NEED');
-  const needRaw = gv(groceryRaw,'NEED','SWAP');
-  const swapRaw = gv(groceryRaw,'SWAP',null);
-  let groceryHTML = '';
-  if (haveRaw) haveRaw.split('|').forEach(i => { const t = i.trim(); if(t) groceryHTML += `<li class="gi"><span class="gi-have">✓</span><div><strong>Have:</strong> ${t}</div></li>`; });
-  if (needRaw) needRaw.split('|').forEach(i => { const t = i.trim(); if(t) groceryHTML += `<li class="gi"><span class="gi-need">🛒</span><div><strong>Buy:</strong> ${t}</div></li>`; });
-  if (swapRaw) groceryHTML += `<li class="gi"><span style="font-size:14px">💰</span><div><strong>Swap:</strong> ${swapRaw}</div></li>`;
-  document.getElementById('r-grocery').innerHTML = groceryHTML || '<li class="gi"><span class="gi-have">✓</span><div>All ingredients already in your kitchen!</div></li>';
+  // GROCERY
+  const gr=gv(text,'GROCERY_LIST','MEAL_PLAN');
+  let gh='';
+  gv(gr,'HAVE','NEED').split('|').forEach(i=>{const t=i.trim();if(t)gh+=`<li class="gi"><span class="gi-have">✓</span><div><strong>Have:</strong> ${t}</div></li>`;});
+  gv(gr,'NEED','SWAP').split('|').forEach(i=>{const t=i.trim();if(t)gh+=`<li class="gi"><span class="gi-need">🛒</span><div><strong>Buy:</strong> ${t}</div></li>`;});
+  const sw=gv(gr,'SWAP',null);if(sw)gh+=`<li class="gi"><span>💰</span><div><strong>Swap:</strong> ${sw}</div></li>`;
+  document.getElementById('r-grocery').innerHTML=gh||'<li class="gi"><span class="gi-have">✓</span><div>All ingredients in your kitchen!</div></li>';
 
   // MEAL PLAN
-  const mpRaw = gv(text,'MEAL_PLAN','CREATOR_KIT');
-  const days = ['DAY1','DAY3','DAY5'];
-  const dayLabels = ['Monday','Wednesday','Friday'];
-  document.getElementById('r-mealplan').innerHTML = days.map((d,i) => {
-    const name = gv(mpRaw, d+'_NAME', d+'_NOTE');
-    const note = gv(mpRaw, d+'_NOTE', days[i+1] ? days[i+1]+'_NAME' : null);
-    return `<div class="mpbox"><div class="mp-day">${dayLabels[i]}</div><div class="mp-meal">${name || 'Remix'}</div><div class="mp-note">${note || ''}</div></div>`;
-  }).join('');
+  const mp=gv(text,'MEAL_PLAN','CREATOR_KIT');
+  document.getElementById('r-mealplan').innerHTML=['DAY1','DAY3','DAY5'].map((d,i)=>`<div class="mpbox"><div class="mp-day">${['Monday','Wednesday','Friday'][i]}</div><div class="mp-meal">${gv(mp,d+'_NAME',d+'_NOTE')||'Remix'}</div><div class="mp-note">${gv(mp,d+'_NOTE',['DAY3','DAY5',null][i]?['DAY3_NAME','DAY5_NAME',null][i]:null)||''}</div></div>`).join('');
 
   // CREATOR KIT
-  const ck = gv(text,'CREATOR_KIT',null);
-  document.getElementById('pm-hook').textContent = gv(ck,'HOOK','CAPTION');
-  document.getElementById('pm-caption').textContent = gv(ck,'CAPTION','PUNCHLINE');
-  document.getElementById('pm-punchline').textContent = gv(ck,'PUNCHLINE','HASHTAGS');
-  document.getElementById('pm-hashtags').textContent = gv(ck,'HASHTAGS','PINNED');
-  document.getElementById('pm-pinned').textContent = gv(ck,'PINNED','POLL');
-  document.getElementById('pm-poll').textContent = gv(ck,'POLL','REPLY1');
-  const replies = [1,2,3,4,5].map(n => gv(ck,'REPLY'+n, n<5?'REPLY'+(n+1):null)).filter(Boolean).join('\n');
-  document.getElementById('pm-replies').textContent = replies;
+  const ck=gv(text,'CREATOR_KIT',null);
+  document.getElementById('pm-hook').textContent=gv(ck,'HOOK','CAPTION');
+  document.getElementById('pm-caption').textContent=gv(ck,'CAPTION','PUNCHLINE');
+  document.getElementById('pm-punchline').textContent=gv(ck,'PUNCHLINE','HASHTAGS');
+  document.getElementById('pm-hashtags').textContent=gv(ck,'HASHTAGS','PINNED');
+  document.getElementById('pm-pinned').textContent=gv(ck,'PINNED','POLL');
+  document.getElementById('pm-poll').textContent=gv(ck,'POLL','REPLY1');
+  document.getElementById('pm-replies').textContent=[1,2,3,4,5].map(n=>gv(ck,'REPLY'+n,n<5?'REPLY'+(n+1):null)).filter(Boolean).join('\n');
 
-  document.getElementById('free-locked-sections').style.display = 'none';
-  document.getElementById('premium-sections').style.display = 'block';
-  document.getElementById('r-recipe').style.display = 'block';
-  document.getElementById('upgrade-card').classList.remove('show');
-  document.getElementById('r-recipe').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  document.getElementById('free-locked').style.display='none';
+  document.getElementById('premium-sections').style.display='block';
+  document.getElementById('upgrade-nudge').classList.remove('show');
+  document.getElementById('r-recipe').style.display='block';
+  document.getElementById('r-recipe').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-// ── RENDER HELPERS ─────────────────────────────────────────────────────────
-function renderIngs(raw) {
-  document.getElementById('r-ings').innerHTML = raw.split('\n').map(l => l.replace(/^[-•*]\s*/,'').trim()).filter(Boolean).map(l => `<span class="itag">${l}</span>`).join('');
-}
-function renderSteps(raw) {
-  document.getElementById('r-steps').innerHTML = raw.split('\n').map(l => l.replace(/^\d+\.\s*/,'').trim()).filter(Boolean).map((l,i) => `<li class="srow"><div class="sn">${i+1}</div><div>${l}</div></li>`).join('');
-}
+function renderIngs(raw){document.getElementById('r-ings').innerHTML=raw.split('\n').map(l=>l.replace(/^[-•*]\s*/,'').trim()).filter(Boolean).map(l=>`<span class="itag">${l}</span>`).join('');}
+function renderSteps(raw){document.getElementById('r-steps').innerHTML=raw.split('\n').map(l=>l.replace(/^\d+\.\s*/,'').trim()).filter(Boolean).map((l,i)=>`<li class="srow"><div class="sn">${i+1}</div><div>${l}</div></li>`).join('');}
 
-// ── GENERATE CONTENT ───────────────────────────────────────────────────────
-async function generateContent() {
-  const inp = document.getElementById('cont-in').value.trim();
-  if (!inp) { showErr('Describe your dish first!'); return; }
-  const btn = document.getElementById('gen-cont-btn'); btn.disabled = true;
+// ── CONTENT ────────────────────────────────────────────────────────────────
+async function generateContent(){
+  const inp=document.getElementById('cont-in').value.trim();
+  if(!inp){showErr('Describe your dish first!');return;}
+  const btn=document.getElementById('gen-cont-btn'); btn.disabled=true;
   startLoad(cMsgs);
-  try {
-    const text = await callAPI(CONTENT_FREE_SYS, `Create ${ct} content for: ${inp}`);
-    showContent(text);
-  } catch(e) {
-    if (e.message === 'LIMIT') { stopLoad(); showLimitCard(); }
+  try{
+    const text=await callAPI(CONTENT_SYS,`Create ${ct} content for: ${inp}`);
+    document.getElementById('cr-hook').textContent=gv(text,'HOOK','CAPTION');
+    document.getElementById('cr-cap').textContent=gv(text,'CAPTION','PUNCHLINE');
+    document.getElementById('cr-punch').textContent=gv(text,'PUNCHLINE','HASHTAGS');
+    document.getElementById('cr-tags').textContent=gv(text,'HASHTAGS',null);
+    document.getElementById('r-content').style.display='block';
+    document.getElementById('r-content').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(e){
+    if(e.message==='LIMIT'){stopLoad();showLimitCard();}
+    else if(e.message==='GLOBAL'){stopLoad();showErr('The free tier is at capacity today — please try again tomorrow or upgrade to Premium.');}
     else showErr('Oops — something went wrong. Please try again!');
   }
-  btn.disabled = false;
+  btn.disabled=false;
 }
 
-function showContent(text) {
-  stopLoad();
-  document.getElementById('cr-hook').textContent = gv(text,'HOOK','CAPTION');
-  document.getElementById('cr-cap').textContent = gv(text,'CAPTION','PUNCHLINE');
-  document.getElementById('cr-punch').textContent = gv(text,'PUNCHLINE','HASHTAGS');
-  document.getElementById('cr-tags').textContent = gv(text,'HASHTAGS',null);
-  document.getElementById('r-content').style.display = 'block';
-  document.getElementById('r-content').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-// ── MISC ───────────────────────────────────────────────────────────────────
-function reset() {
-  document.getElementById('ing-in').value = '';
-  document.getElementById('cont-in').value = '';
-  hideAll();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function cp(id, btn) {
-  navigator.clipboard.writeText(document.getElementById(id).textContent).then(() => {
-    const o = btn.textContent; btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent = o, 2000);
-  });
-}
-
-function subEmail() {
-  const e = document.getElementById('email-in').value.trim();
-  if (!e || !e.includes('@')) { alert('Please enter a valid email.'); return; }
-  document.querySelector('.erow').style.display = 'none';
-  document.getElementById('esok').style.display = 'block';
-  // TODO: connect to Beehiiv/ConvertKit
-}
+function reset(){document.getElementById('ing-in').value='';document.getElementById('cont-in').value='';hideResults();window.scrollTo({top:0,behavior:'smooth'});}
+function cp(id,btn){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>{const o=btn.textContent;btn.textContent='✓ Copied!';setTimeout(()=>btn.textContent=o,2000);});}
+function subEmail(){const e=document.getElementById('email-in').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email.');return;}document.querySelector('.erow').style.display='none';document.getElementById('esok').style.display='block';}
 
 init();
 </script>
