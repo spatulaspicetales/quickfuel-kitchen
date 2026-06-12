@@ -83,7 +83,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: 'QuickFuel Kitchen <noreply@yourdomain.com>',
+        from: 'QuickFuel Kitchen <onboarding@resend.dev>',
         to: email,
         subject,
         html
