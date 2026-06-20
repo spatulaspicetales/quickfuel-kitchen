@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "QuickFuel Kitchen - AI recipe tool by Spatula Spice & Tales",
   "type": "module",
-  "engines": { "node": "24.x" },
+  "engines": { "node": "20.x" },
   "dependencies": {
     "stripe": "^14.0.0",
     "@vercel/kv": "^2.0.0"
