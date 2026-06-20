@@ -2,6 +2,7 @@
   "name": "quickfuel-kitchen",
   "version": "1.0.0",
   "description": "QuickFuel Kitchen - AI recipe tool by Spatula Spice & Tales",
+  "type": "module",
   "engines": { "node": "24.x" },
   "dependencies": {
     "stripe": "^14.0.0",
